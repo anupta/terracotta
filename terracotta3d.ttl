@@ -3,37 +3,70 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
-# Vocabulary (Ontology) definition
+#################################################################
+# Ontology Definition
+#################################################################
+
 <https://anupta.github.io/terracotta3d> a owl:Ontology ;
-    rdfs:label "Terracotta3D Vocabulary" .
+    rdfs:label "Terracotta3D Metadata Vocabulary" ;
+    rdfs:comment "Custom metadata schema for 3D terracotta cultural objects (Bishnupur, West Bengal)" .
 
-# Properties
+#################################################################
+# 3D-SPECIFIC FIELDS (CORE CONTRIBUTION)
+#################################################################
+
 t3d:modelType a rdf:Property ;
-    rdfs:label "Model Type" .
-
-t3d:material a rdf:Property ;
-    rdfs:label "Material" .
-
-t3d:dimensions a rdf:Property ;
-    rdfs:label "Dimensions" .
-
-t3d:captureMethod a rdf:Property ;
-    rdfs:label "3D Capture Method" .
+    rdfs:label "Model Type" ;
+    rdfs:comment "Type of 3D object such as sculpture, plaque, figurine, architectural element" .
 
 t3d:polygonCount a rdf:Property ;
-    rdfs:label "Polygon Count" .
+    rdfs:label "Polygon Count" ;
+    rdfs:comment "Total number of polygons in the 3D model" .
 
 t3d:textureResolution a rdf:Property ;
-    rdfs:label "Texture Resolution" .
+    rdfs:label "Texture Resolution" ;
+    rdfs:comment "Resolution of textures applied to the 3D model (e.g., 4096x4096)" .
 
-t3d:fileFormat a rdf:Property ;
-    rdfs:label "File Format" .
+#################################################################
+# CULTURAL / DOMAIN-SPECIFIC FIELDS (FROM TERRACOTTA STUDY)
+#################################################################
 
-t3d:culturalContext a rdf:Property ;
-    rdfs:label "Cultural Context" .
+t3d:deity a rdf:Property ;
+    rdfs:label "Deity" ;
+    rdfs:comment "Associated deity of the temple or terracotta object" .
 
-t3d:provenance a rdf:Property ;
-    rdfs:label "Provenance" .
+t3d:technique a rdf:Property ;
+    rdfs:label "Technique" ;
+    rdfs:comment "Production technique such as moulded, carved brick, bas-relief" .
 
-t3d:condition a rdf:Property ;
-    rdfs:label "Condition" .
+t3d:architecturalType a rdf:Property ;
+    rdfs:label "Architectural Type" ;
+    rdfs:comment "Architectural classification such as chala, ratna, rekha" .
+
+t3d:religiousContext a rdf:Property ;
+    rdfs:label "Religious Context" ;
+    rdfs:comment "Religious significance or usage context" .
+
+t3d:iconography a rdf:Property ;
+    rdfs:label "Iconography / Theme" ;
+    rdfs:comment "Narrative or visual theme such as Ramayana, Krishna Leela" .
+
+t3d:heritageStatus a rdf:Property ;
+    rdfs:label "Heritage Status" ;
+    rdfs:comment "Official heritage designation (ASI, State Protected, etc.)" .
+
+#################################################################
+# OPTIONAL DOMAIN ENRICHMENT (USEFUL BUT NOT DUPLICATE)
+#################################################################
+
+t3d:stylePeriod a rdf:Property ;
+    rdfs:label "Style Period" ;
+    rdfs:comment "Historical or stylistic period (e.g., Malla dynasty)" .
+
+t3d:colour a rdf:Property ;
+    rdfs:label "Colour" ;
+    rdfs:comment "Dominant colour or visual tone of terracotta" .
+
+t3d:note a rdf:Property ;
+    rdfs:label "Note" ;
+    rdfs:comment "Additional descriptive or interpretative notes" .
