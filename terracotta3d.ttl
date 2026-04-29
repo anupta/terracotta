@@ -1,10 +1,10 @@
-@prefix t3d: <https://anupta.github.io/terracotta#> .
+@prefix t3d: <https://anupta.github.io/terracotta3d#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
-# Vocabulary definition
-<https://anupta.github.io/terracotta> a owl:Ontology ;
+# Vocabulary (Ontology) definition
+<https://anupta.github.io/terracotta3d> a owl:Ontology ;
     rdfs:label "Terracotta3D Vocabulary" .
 
 # Properties
