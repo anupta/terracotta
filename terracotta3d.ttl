@@ -1,0 +1,38 @@
+@prefix t3d: <https://anupta.github.io/terracotta3d#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Vocabulary definition
+t3d: a rdf:Property ;
+    rdfs:label "Terracotta3D Vocabulary" .
+
+# Properties
+t3d:modelType a rdf:Property ;
+    rdfs:label "Model Type" .
+
+t3d:material a rdf:Property ;
+    rdfs:label "Material" .
+
+t3d:dimensions a rdf:Property ;
+    rdfs:label "Dimensions" .
+
+t3d:captureMethod a rdf:Property ;
+    rdfs:label "3D Capture Method" .
+
+t3d:polygonCount a rdf:Property ;
+    rdfs:label "Polygon Count" .
+
+t3d:textureResolution a rdf:Property ;
+    rdfs:label "Texture Resolution" .
+
+t3d:fileFormat a rdf:Property ;
+    rdfs:label "File Format" .
+
+t3d:culturalContext a rdf:Property ;
+    rdfs:label "Cultural Context" .
+
+t3d:provenance a rdf:Property ;
+    rdfs:label "Provenance" .
+
+t3d:condition a rdf:Property ;
+    rdfs:label "Condition" .
