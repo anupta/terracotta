@@ -1,0 +1,20 @@
+@prefix premis: <http://id.loc.gov/vocabulary/preservation#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Minimal usable PREMIS subset
+
+premis:formatName a rdf:Property ;
+    rdfs:label "File Format Name" .
+
+premis:creatingApplication a rdf:Property ;
+    rdfs:label "Creating Application" .
+
+premis:objectCategory a rdf:Property ;
+    rdfs:label "Object Category" .
+
+premis:storageMedium a rdf:Property ;
+    rdfs:label "Storage Medium" .
+
+premis:environment a rdf:Property ;
+    rdfs:label "Technical Environment" .
