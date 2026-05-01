@@ -31,7 +31,7 @@ t3d:iconography a rdf:Property ;
 # ARCHITECTURAL INFORMATION
 #################################################################
 
-t3d:colour a rdf:Property ;
+t3d:architecturalPlan a rdf:Property ;
     rdfs:label "Architectural Plan" ;
     rdfs:comment "Ground plan or layout of the structure (e.g., square, rectangular, cruciform, ek-ratna base)" .
 
