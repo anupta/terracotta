@@ -12,61 +12,57 @@
     rdfs:comment "Custom metadata schema for 3D terracotta cultural objects (Bishnupur, West Bengal)" .
 
 #################################################################
-# 3D-SPECIFIC FIELDS (CORE CONTRIBUTION)
-#################################################################
-
-t3d:modelType a rdf:Property ;
-    rdfs:label "Model Type" ;
-    rdfs:comment "Type of 3D object such as sculpture, plaque, figurine, architectural element" .
-
-t3d:polygonCount a rdf:Property ;
-    rdfs:label "Polygon Count" ;
-    rdfs:comment "Total number of polygons in the 3D model" .
-
-t3d:textureResolution a rdf:Property ;
-    rdfs:label "Texture Resolution" ;
-    rdfs:comment "Resolution of textures applied to the 3D model (e.g., 4096x4096)" .
-
-#################################################################
-# CULTURAL / DOMAIN-SPECIFIC FIELDS (FROM TERRACOTTA STUDY)
+# CULTURAL / INTERPRETATIVE CONTEXT
 #################################################################
 
 t3d:deity a rdf:Property ;
     rdfs:label "Deity" ;
-    rdfs:comment "Associated deity of the temple or terracotta object" .
-
-t3d:technique a rdf:Property ;
-    rdfs:label "Technique" ;
-    rdfs:comment "Production technique such as moulded, carved brick, bas-relief" .
-
-t3d:architecturalType a rdf:Property ;
-    rdfs:label "Architectural Type" ;
-    rdfs:comment "Architectural classification such as chala, ratna, rekha" .
+    rdfs:comment "Associated deity of the temple or represented in the terracotta object" .
 
 t3d:religiousContext a rdf:Property ;
     rdfs:label "Religious Context" ;
-    rdfs:comment "Religious significance or usage context" .
+    rdfs:comment "Religious tradition, usage, or cultural significance associated with the object" .
 
 t3d:iconography a rdf:Property ;
     rdfs:label "Iconography / Theme" ;
-    rdfs:comment "Narrative or visual theme such as Ramayana, Krishna Leela" .
-
-t3d:heritageStatus a rdf:Property ;
-    rdfs:label "Heritage Status" ;
-    rdfs:comment "Official heritage designation (ASI, State Protected, etc.)" .
+    rdfs:comment "Narrative or symbolic theme depicted (e.g., Ramayana scenes, Krishna Leela)" .
 
 #################################################################
-# OPTIONAL DOMAIN ENRICHMENT (USEFUL BUT NOT DUPLICATE)
+# ARCHITECTURAL INFORMATION
 #################################################################
-
-t3d:stylePeriod a rdf:Property ;
-    rdfs:label "Style Period" ;
-    rdfs:comment "Historical or stylistic period (e.g., Malla dynasty)" .
 
 t3d:colour a rdf:Property ;
-    rdfs:label "Colour" ;
-    rdfs:comment "Dominant colour or visual tone of terracotta" .
+    rdfs:label "Architectural Plan" ;
+    rdfs:comment "Ground plan or layout of the structure (e.g., square, rectangular, cruciform, ek-ratna base)" .
+
+#################################################################
+# CONDITION / CONSERVATION / LEGAL
+#################################################################
+
+t3d:architecturalType a rdf:Property ;
+    rdfs:label "Conservation Status" ;
+    rdfs:comment "Current conservation condition (e.g., conserved, under restoration, neglected, stabilized)" .
+
+t3d:heritageStatus a rdf:Property ;
+    rdfs:label "Structural Integrity" ;
+    rdfs:comment "Physical condition of the structure (e.g., intact, minor damage, major damage, fragmentary, restored)" .
+
+t3d:legalStatus a rdf:Property ;
+    rdfs:label "Legal Status" ;
+    rdfs:comment "Legal protection or ownership status (e.g., ASI Protected Monument, State Protected, Unprotected, Privately Owned)" .
+
+#################################################################
+# 3D CREATION / DIGITAL WORKFLOW
+#################################################################
+
+t3d:technique a rdf:Property ;
+    rdfs:label "Processing Application" ;
+    rdfs:comment "Software or application used in processing the 3D model (e.g., Agisoft Metashape, Blender)" .
+
+t3d:stylePeriod a rdf:Property ;
+    rdfs:label "3D Digitization Method" ;
+    rdfs:comment "Method used to create the 3D model (e.g., photogrammetry, laser scanning, structured light scanning, manual modeling, hybrid method)" .
 
 t3d:note a rdf:Property ;
-    rdfs:label "Note" ;
-    rdfs:comment "Additional descriptive or interpretative notes" .
+    rdfs:label "Accuracy Level" ;
+    rdfs:comment "Estimated accuracy or fidelity of the 3D model (e.g., high, medium, low, survey-grade)" .
