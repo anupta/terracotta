@@ -39,7 +39,7 @@ t3d:architecturalPlan a rdf:Property ;
 # CONDITION / CONSERVATION / LEGAL
 #################################################################
 
-t3d:architecturalType a rdf:Property ;
+t3d:conservationStatus a rdf:Property ;
     rdfs:label "Conservation Status" ;
     rdfs:comment "Current conservation condition (e.g., conserved, under restoration, neglected, stabilized)" .
 
