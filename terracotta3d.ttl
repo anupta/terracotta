@@ -43,7 +43,7 @@ t3d:architecturalType a rdf:Property ;
     rdfs:label "Conservation Status" ;
     rdfs:comment "Current conservation condition (e.g., conserved, under restoration, neglected, stabilized)" .
 
-t3d:heritageStatus a rdf:Property ;
+t3d:structuralIntegrity a rdf:Property ;
     rdfs:label "Structural Integrity" ;
     rdfs:comment "Physical condition of the structure (e.g., intact, minor damage, major damage, fragmentary, restored)" .
 
@@ -55,14 +55,14 @@ t3d:legalStatus a rdf:Property ;
 # 3D CREATION / DIGITAL WORKFLOW
 #################################################################
 
-t3d:technique a rdf:Property ;
+t3d:processingApplication a rdf:Property ;
     rdfs:label "Processing Application" ;
     rdfs:comment "Software or application used in processing the 3D model (e.g., Agisoft Metashape, Blender)" .
 
-t3d:stylePeriod a rdf:Property ;
+t3d:3DDigitizationMethod a rdf:Property ;
     rdfs:label "3D Digitization Method" ;
     rdfs:comment "Method used to create the 3D model (e.g., photogrammetry, laser scanning, structured light scanning, manual modeling, hybrid method)" .
 
-t3d:note a rdf:Property ;
+t3d:accuracyLevel a rdf:Property ;
     rdfs:label "Accuracy Level" ;
     rdfs:comment "Estimated accuracy or fidelity of the 3D model (e.g., high, medium, low, survey-grade)" .
