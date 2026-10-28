@@ -2,7 +2,7 @@
 
 Test protocol and results for the Terracotta3D repository, a 3D-model repository of 18 terracotta temples of Bishnupur, West Bengal, built on Omeka S with structured metadata, an interactive 3D viewer, a map interface, keyword search and an MCP-based natural-language search.
 
-This page supports Section 5 (System Testing and Evaluation) of the manuscript **[CONFIRM: manuscript title]**. The manuscript summarises the outcomes; this page holds the full tables, query lists and screenshots.
+This page supports Section 5 (System Testing and Evaluation) of the manuscript. The manuscript summarises the outcomes; this page holds the full tables, query lists and screenshots.
 
 ## Scope of the evaluation
 
