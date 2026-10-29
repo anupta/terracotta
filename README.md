@@ -2,44 +2,10 @@
 
 Test protocol and results for the Terracotta3D repository, a FAIR-oriented 3D digital heritage repository of 18 terracotta temples of Bishnupur, West Bengal, India. The repository is built on Omeka S and combines an interactive 3D viewer, standards-based metadata, a map interface, keyword search and a natural-language search supported by GPT-OSS 20B through the Model Context Protocol (MCP).
 
-This page supports Section 5 (System Testing and Evaluation) of the manuscript **Designing a FAIR-Oriented 3D Digital Heritage Repository: A Case Study of the Terracotta Temples of Bishnupur, West Bengal** by Anupta Jana. The manuscript summarises the outcomes; this page holds the full tables, query lists and screenshots.
+This page supports Section 5 (System Testing and Evaluation) of the manuscript **Designing a FAIR-Oriented 3D Digital Heritage Repository: A Case Study of the Terracotta Temples of Bishnupur, West Bengal**. The manuscript summarises the outcomes; this page holds the full tables, query lists and screenshots.
 
 Live repository: <http://94.103.163.196/omeka/s/terracotta/page/Home>
 
-## About the repository
-
-### How the 3D models were produced
-
-| Stage | Detail | Date |
-| --- | --- | --- |
-| Image acquisition | Photographs of the 18 selected temples | 14 February 2026 |
-| Image preparation | Background-noise removal with ChatGPT-assisted image processing | 17 September 2026 |
-| 3D reconstruction | Image-to-3D generation in Tripo3D Studio, exported as GLB (.glb) | processing completed 24 October 2026 |
-
-### Technical stack
-
-| Component | Implementation |
-| --- | --- |
-| Repository software | Omeka S on an Ubuntu cloud VPS (2-core CPU, 4 GB RAM) |
-| Record structure | One Omeka S item per temple, using the custom *Heritage Object* resource template |
-| 3D viewing | WebGL `<model-viewer>` component embedded in the item page (`item/show.phtml`) for GLB/glTF models, with a media gallery for full-size images |
-| Map | Leaflet map on the search page (`item/search.phtml`, route `?tab=map`) with a custom coordinate parser for decimal degrees, DMS notation and cardinal directions |
-| Modules | Persistent Identifiers (ARK), IIIF Server, Universal Viewer, CustomVocab, ValueSuggest, NumericDataTypes |
-| Keyword search | Standard Omeka S search over temple names, descriptive terms and metadata values |
-| Natural-language search | MCP component with GPT-OSS 20B, added alongside the keyword search |
-
-### Metadata
-
-Metadata combines Dublin Core Terms, Europeana Data Model 3D-related properties, Schema.org properties and a custom Terracotta-3D vocabulary. The *Heritage Object* template has 21 fields in six groups:
-
-| Metadata group | Properties |
-| --- | --- |
-| Descriptive metadata | Title, Alternative Title, Contributor, Description, Subject, Type |
-| Identification | Identifier |
-| Temporal and spatial metadata | Date, Spatial Coverage, Capture Date |
-| Physical and technical metadata | Extent, Format, EDM type, vertex count, polygon count |
-| Digital provenance | Processing Software, Processing Date, digitalSourceType |
-| Rights and usage | Rights, License, intended usage |
 
 ## Scope of the evaluation
 
@@ -225,7 +191,6 @@ All model session captures are archived under [`screenshots/nlp/`](file:///scree
 
 ```
 README.md                                 evaluation protocol and summary (this file)
-results/                                  CSV result tables (one per test)
 screenshots/                              audit verification screenshots
 ├── keyword/                              fulltext keyword search query captures
 │   ├── 01-keyword-rasmancha.png
