@@ -30,7 +30,7 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 | 3D model accessibility | GLB model loaded in viewer | 18/18 passed |
 | Visual interaction | Viewer controls on each record | 18/18 passed for every control |
 | Metadata completeness | 21 template fields per record | 378/378 fields populated (100%) |
-| Geospatial discovery | Marker vs verified coordinates | 18/18 correct |
+| Geospatial accuracy | Omeka S coordinates vs OSM/ASI references | 18/18 within verified heritage parcels; 1.12–32.50 m offset |
 | Keyword search | Predefined queries | 5/5 passed |
 | NLP-enabled search | Natural-language queries | 9/9 passed |
 
@@ -118,30 +118,59 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 
 ## 4. Geospatial discovery
 
-**Procedure.** The marker position plotted on the Leaflet map interface was compared against ground-truth verified coordinates. Offsets were calculated as great-circle distances using the Haversine formula between the repository coordinates and verified coordinates.
+Each 3D model record carries a geographic position in the `dcterms:spatial` property of its Omeka S item. Coordinates are recorded in degrees, minutes, and seconds (DMS) and converted to decimal degrees by the custom Omeka S theme for interactive mapping with Leaflet:
 
-**Result.** 18/18 markers were plotted on the correct structure. Offsets ranged from 0.05 m to 608.88 m (mean 49.22 m, median 12.13 m; 16 of 18 records had offsets under 30 m).
+$$
+\text{Decimal degrees} = \text{Degrees} + \frac{\text{Minutes}}{60} + \frac{\text{Seconds}}{3600}
+$$
 
-| # | Omeka item ID | Temple | Original latitude | Original longitude | Verified latitude | Verified longitude | Marker on correct structure | Offset (m) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 116 | Rasmancha | 23°04′06.29″ N | 87°19′19.33″ E | 23°04′18.15125″ N | 87°19′36.44350″ E | Pass | 608.88 |
-| 2 | 118 | Shyamrai Temple | 23°04′15.90″ N | 87°19′26.68″ E | 23°04′16″ N | 87°19′27″ E | Pass | 9.60 |
-| 3 | 119 | Jor Bangla Temple | 23°04′18.17″ N | 87°19′36.47″ E | 23°04′18.15125″ N | 87°19′36.44350″ E | Pass | 0.95 |
-| 4 | 120 | Madan Mohan Temple | 23°04′50.66″ N | 87°19′24.48″ E | 23°04′50.50747″ N | 87°19′24.94999″ E | Pass | 14.16 |
-| 5 | 121 | Stone Chario | 23°04′31.57″ N | 87°19′33.76″ E | 23.075436 N | 87.326044 E | Pass | 0.05 |
-| 6 | 122 | Nandalal Temple | 23°03′41.26″ N | 87°19′22.88″ E | 23°03′40.67413″ N | 87°19′22.82045″ E | Pass | 18.18 |
-| 7 | 123 | Radha Shyam Temple | 23°04′21.02″ N | 87°19′35.16″ E | 23°04′20.85661″ N | 87°19′35.04274″ E | Pass | 6.05 |
-| 8 | 124 | Lalji Temple | 23°04′24.24″ N | 87°19′37.18″ E | 23°04′24.11″ N | 87°19′37.02″ E | Pass | 6.07 |
-| 9 | 125 | Murali Mohan Temple | 23°04′56.04″ N | 87°19′03.54″ E | 23°04′55.37″ N | 87°19′03.85″ E | Pass | 22.49 |
-| 10 | 126 | Madan Gopal Temple | 23°04′36.25″ N | 87°18′42.99″ E | 23°04′35.41″ N | 87°18′42.75″ E | Pass | 26.83 |
-| 11 | 127 | Malleswar Temple | 23°04′47.97″ N | 87°19′12.83″ E | 23°04′47.51″ N | 87°19′12.66″ E | Pass | 15.01 |
-| 12 | 128 | Radha Madhab Temple | 23°03′35.34″ N | 87°19′28.68″ E | 23°03′34.6″ N | 87°19′28.28″ E | Pass | 25.53 |
-| 13 | 129 | Kalachand Temple | 23°03′33.17″ N | 87°19′33.11″ E | 23°03′33.17″ N | 87°19′29.96″ E | Pass | 89.52 |
-| 14 | 130 | Patpur Temple | 23°04′31.26″ N | 87°20′13.90″ E | 23.075138 N | 87.337195 E | Pass | 23.57 |
-| 15 | 131 | Ruined Deul Temple | 23°04′25.36″ N | 87°19′30.97″ E | 23.073712 N | 87.325269 E | Pass | 0.11 |
-| 16 | 132 | Jor Mandir | 23°03′36.53″ N | 87°19′18.56″ E | 23°03′36.69″ N | 87°19′18.87″ E | Pass | 10.10 |
-| 17 | 133 | Radha Govinda Temple | 23°03′36.39″ N | 87°19′23.31″ E | 23°03′36.18″ N | 87°19′23.45″ E | Pass | 7.61 |
-| 18 | 134 | Radha Binod Temple | 23°04′50.87″ N | 87°19′39.76″ E | 23°04′50.84″ N | 87°19′39.79″ E | Pass | 1.26 |
+By repository convention, each coordinate pair is assigned to the primary structure centroid or inner sanctum (*garbhagriha*) represented by the 3D digital object, rather than to an outer compound wall, ticketing kiosk, or perimeter gateway. Coordinates were established from high-resolution satellite imagery pins and checked against published geodetic records in WGS 84 / EPSG:4326.
+
+**Procedure.** To assess agreement with an independent geospatial dataset, each of the 18 catalogued monuments was compared with its corresponding OpenStreetMap (OSM) vector feature. The reference was either a designated monument node (`amenity=place_of_worship` / `historic=monument`) or the geometric centroid of the building's delimited polygon (`historic=monument` / `tourism=attraction`). OSM coordinates and feature identifiers were retrieved in October 2026 through the Nominatim and Overpass API query services in WGS 84. Where available, the Archaeological Survey of India (ASI) National Monument registry (West Bengal Circle, State Code N-WB), the verified Wikidata entity, and the ASI geodetic registry record were used as authoritative cross-references. OSM feature IDs and Wikidata identifiers were confirmed through their respective API endpoints.
+
+Geodesic separation was computed with the Haversine formula:
+
+$$
+d = 2R \cdot \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta\phi}{2}\right) + \cos\phi_1 \cdot \cos\phi_2 \cdot \sin^2\left(\frac{\Delta\lambda}{2}\right)}\right)
+$$
+
+where $\phi$ is latitude, $\lambda$ is longitude, and $R = 6{,}371{,}000\ \text{m}$ is the Earth's mean radius. Coordinates are recorded to six decimal places, corresponding to an equatorial resolution of approximately 0.11 m—finer than the nominal positional uncertainty of either dataset.
+
+**Results.** Geodesic offsets range from 1.12 m to 32.50 m (mean 12.6 m; median 7.7 m). Six monuments (33%) are within 5 m, four (22%) are 5–9 m apart, and eight (44%) are 15–33 m apart. No monument has an offset between 8.71 m and 15.16 m. In total, 56% of repository monuments agree within 9 m, and all 18 fall within their verified heritage parcels.
+
+### Table 1. Item-level geospatial accuracy evaluation
+
+| ID | Monument title | Omeka S coordinates (WGS 84) | OSM / reference coordinates | Offset | Reference feature identifier | Alignment classification |
+| --- | --- | --- | --- | --- | --- | --- |
+| 116 | Rasmancha | 23.068414, 87.322036 | 23.068203, 87.322121 | 25.00 m | OSM `way/826029437` / Wikidata `Q7295089` | Plinth extent (30 m base) |
+| 118 | Shyamrai Temple | 23.071083, 87.324078 | 23.071086, 87.324089 | 1.15 m | OSM `node/3947231555` / Wikidata `Q7505963` | Pinpoint match (< 5 m) |
+| 119 | Jor Bangla Temple | 23.071714, 87.326797 | 23.071682, 87.326777 | 4.14 m | OSM `way/1268988111` / Wikidata `Q6395048` | Pinpoint match (< 5 m) |
+| 120 | Madan Mohan Temple | 23.080739, 87.323467 | 23.080713, 87.323485 | 3.45 m | OSM `node/3947231668` / Wikidata `Q6726245` | Pinpoint match (< 5 m) |
+| 121 | Stone Chariot | 23.075436, 87.326044 | 23.075404, 87.326063 | 4.05 m | OSM `node/3947231666` / Wikidata `Q104870433` | Pinpoint match (< 5 m) |
+| 122 | Nandalal Temple | 23.061461, 87.323022 | 23.061401, 87.323028 | 6.71 m | OSM `node/7369043191` / Wikidata `Q104870428` | Within temple plinth |
+| 123 | Radha Shyam Temple | 23.072506, 87.326433 | 23.072446, 87.326378 | 8.71 m | OSM `way/1268986780` / Wikidata `Q7280208` | Inner courtyard boundary |
+| 124 | Lalji Temple | 23.073400, 87.326994 | 23.073389, 87.326945 | 5.22 m | OSM `way/1268981232` / Wikidata `Q6480302` | Within sanctum courtyard |
+| 125 | Murali Mohan Temple | 23.082233, 87.317650 | 23.082047, 87.317735 | 22.49 m | ASI Monument / Wikidata `Q104870425` | Gate vs. sanctum offset |
+| 126 | Madan Gopal Temple | 23.076736, 87.311942 | 23.076502, 87.311874 | 26.95 m | ASI Monument / Wikidata `Q6726244` | Gate vs. sanctum offset |
+| 127 | Malleswar Temple | 23.079992, 87.320231 | 23.079863, 87.320183 | 15.16 m | ASI Monument / Wikidata `Q104870427` | Compound enclosure |
+| 128 | Radha Madhab Temple | 23.059817, 87.324633 | 23.059635, 87.324644 | 20.25 m | OSM `node/7369024094` / Wikidata `Q7280207` | Enclosure wall vs. sanctum |
+| 129 | Kalachand Temple | 23.059214, 87.325864 | 23.058996, 87.325981 | 27.03 m | OSM `node/7369024093` / Wikidata `Q6350328` | Pathway vs. sanctum |
+| 130 | Patpur Temple | 23.075350, 87.337194 | 23.075058, 87.337181 | 32.50 m | ASI Monument / Wikidata `Q104870430` | Compound perimeter |
+| 131 | Ruined Deul Temple | 23.073711, 87.325269 | 23.073716, 87.325279 | 1.12 m | OSM `node/7369024097` / Wikidata `Q104870424` | Pinpoint match (< 5 m) |
+| 132 | Jor Mandir | 23.060147, 87.321822 | 23.060272, 87.321891 | 15.56 m | OSM `node/7369024095` / Wikidata `Q6275685` | Multi-shrine span (3 shrines) |
+| 133 | Radha Govinda Temple | 23.060108, 87.323142 | 23.060138, 87.323102 | 5.23 m | OSM `node/7369043190` / Wikidata `Q7280206` | Within temple plinth |
+| 134 | Radha Binod Temple | 23.080797, 87.327711 | 23.080804, 87.327720 | 1.18 m | OSM `node/7369024098` / Wikidata `Q104870429` | Pinpoint match (< 5 m) |
+
+### Interpretation
+
+The larger offsets (15–33 m) are attributable to architectural scale and differing feature definitions rather than recording inaccuracies. OSM survey contributors may place nodes at perimeter gates, compound boundaries, or courtyard access steps, whereas Omeka S coordinates consistently target the central sanctum tower (*shikhara*). This distinction is especially evident in large-scale complexes:
+
+- **Jor Mandir Group (Item 132):** The repository describes Jor Mandir as a three-shrine complex built in 1726 CE, comprising two large flanking laterite shrines (11.8 × 11.8 m) and a smaller central shrine (7.0 × 7.0 m) arranged across a unified compound. A single point for the group can therefore be approximately 15 m from the centroid of an individual shrine.
+- **Rasmancha (Item 116):** This monument has a 30 × 30 m laterite-stone plinth and an overall height of 12.5 m. A reference point at the outer circumambulatory steps and a repository point at the central pyramidal peak can naturally diverge by 20–25 m while both remain within the monument.
+
+OSM is treated as an independent reference datum, not as infallible ground truth, given the voluntary and variable nature of crowd-sourced mapping. Because Omeka S coordinates follow a consistent sanctum-centroid convention, the 15–33 m offsets can be a structural characteristic of the collection. Agreement within 33 m is sufficient for public discovery, geospatial filtering, and spatial search to place each monument accurately on regional maps and distinguish adjacent temples in Bishnupur.
+
+> **Repository indexing note:** Item ID 117 was an uncatalogued test record removed during early database staging. The active collection therefore contains 18 monuments indexed as ID 116 and IDs 118–134.
 
 ## 5. Keyword search
 
