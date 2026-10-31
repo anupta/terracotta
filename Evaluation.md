@@ -63,7 +63,7 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 
 ## 2. Visual interaction (viewer controls)
 
-**Procedure.** Each control was tested manually on every record. Outcomes: Pass, Fail, or Not available. Screenshots of the initial, rotated and zoomed views are in `screenshots/viewer/`.
+**Procedure.** Each control was tested manually on every record. Outcomes: Pass, Fail, or Not available. Viewer-control screenshots are not included in the current evidence archive.
 
 **Result.** All controls passed on all 18 records.
 
@@ -205,7 +205,7 @@ OSM is treated as an independent reference datum, not as infallible ground truth
 - **Bengali-script access:** The native-script queries `রাসমঞ্চ` and `পাথরের রথ` each retrieved the corresponding monument record through its Bengali alternative title.
 - **Precision caveat:** The 100% figures are author-assessed precision against the expected result sets defined for this benchmark. They do not constitute independent relevance judgments or establish recall across all potentially relevant records.
 
-All full-size search interface captures are archived under [`screenshots/keyword/`](file:///screenshots/keyword/). The earlier five-query interface screenshots remain available there as illustrative evidence.
+**Keyword-search screenshots** (click a highlighted link to open the full-size image): **[01 — Rasmancha](./screenshots/keyword/01-keyword-rasmancha.png)** · **[02 — Jor Bangla](./screenshots/keyword/02-keyword-jorbangla.png)** · **[03 — Madan Mohan](./screenshots/keyword/03-keyword-madanmohan.png)** · **[04 — Shyamrai](./screenshots/keyword/04-keyword-shyamrai.png)** · **[05 — Ekaratna](./screenshots/keyword/05-keyword-ekaratna.png)**.
 
 ## 6. NLP-enabled search
 
@@ -215,17 +215,17 @@ All full-size search interface captures are archived under [`screenshots/keyword
 
 | # | Natural-language query | Query type / Expected result | Model response summary (MCP + GPT-OSS 20B) | Result | Evidence screenshot |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Find records related to Rasmancha in Bishnupur | Record retrieval (Rasmancha, ID 116) | Returned Rasmancha (ID 116) with item URL and metadata summary | Pass | [`01-rasmancha-retrieval.png`](file:///screenshots/nlp/01-rasmancha-retrieval.png) |
-| 2 | Show me the creator, date, location, description, and identifier of Jor Mandir | Specific metadata field extraction (Jor Bangla / Jor Mandir) | Correctly returned structured table with Creator (King Raghunath Singha), Date (1655 CE), Location with coordinates, and Description for item 119 | Pass | [`02-jor-mandir-metadata.png`](file:///screenshots/nlp/02-jor-mandir-metadata.png) |
-| 3 | Which temple records have missing metadata? | Metadata quality audit across collection | Checked all 18 temple records (IDs 116, 118, 119, 121–134) against core template properties and correctly concluded 0 missing metadata fields | Pass | [`03-metadata-audit.png`](file:///screenshots/nlp/03-metadata-audit.png) |
-| 4 | Show me the available digital assets for Patpur Temple | Digital asset inspection (Item 130) | Correctly identified 3D GLB model with vertex count (1.02M), polygon count (1.92M), capture date, and processing provenance; confirmed no video/extra assets | Pass | [`04-patpur-assets.png`](file:///screenshots/nlp/04-patpur-assets.png) |
-| 5 | Find temples within 2 kilometres of Rasmancha. | Spatial proximity calculation (Geodesic distance from 23°04′06.29″ N, 87°19′19.33″ E) | Calculated distances to nearby monuments (Shyamrai ~0.4 km, Jor Bangla ~0.5 km, Lalji ~0.5 km, Nandalal ~0.8 km, etc.) within the 2 km radius | Pass | [`05-proximity-rasmancha.png`](file:///screenshots/nlp/05-proximity-rasmancha.png) |
-| 6 | Which temples are closest to Radha Govinda Temple? | Relative geospatial proximity (from 23°03′36.39″ N, 87°19′23.31″ E) | Identified the two Jor Mandir entries (ID 132) as very nearest (~0.13 km / ~130 m away); next closest identified as Nandalal (~0.84 km), Kalachand (~0.89 km), and Radha Madhab (~0.91 km), all within roughly 0.9 km | Pass | [`06-proximity-radhagovinda.png`](file:///screenshots/nlp/06-proximity-radhagovinda.png) |
-| 7 | Compare the architectural features of Radha Binod Temple and Jor Mandir | Cross-record architectural comparison | Produced a side-by-side comparative table: Construction date (1659 CE vs 1726 CE), Style (*Atchala* vs *Ek-Ratna* group), Material (laterite with stucco), Roof type, and Dimensions | Pass | [`07-architecture-comparison.png`](file:///screenshots/nlp/07-architecture-comparison.png) |
-| 8 | Which temples have documented terracotta reliefs depicting scenes from the Ramayana? | Thematic iconography / narrative scene filter | Identified and summarised Ramayana narrative reliefs on Shyamrai (ID 118), Jor Bangla (ID 119), Kalachand (ID 129), Radha Madhab (ID 128), and Jor Mandir (ID 132) | Pass | [`08-ramayana-reliefs.png`](file:///screenshots/nlp/08-ramayana-reliefs.png) |
-| 9 | Summarise the historical significance of the catalogued temples | Multi-record historical synthesis | Synthesised historical significance across Malla dynasty heritage: Rasmancha (unique stepped-pyramid, Rash festival), Shyamrai (earliest Pancha-Ratna), Jor Bangla (hybrid do-chala/char-chala), Madan Mohan (continuous worship), etc. | Pass | [`09-historical-significance.png`](file:///screenshots/nlp/09-historical-significance.png) |
+| 1 | Find records related to Rasmancha in Bishnupur | Record retrieval (Rasmancha, ID 116) | Returned Rasmancha (ID 116) with item URL and metadata summary | Pass | **[View screenshot](./screenshots/nlp/01-rasmancha-retrieval.png)** |
+| 2 | Show me the creator, date, location, description, and identifier of Jor Mandir | Specific metadata field extraction (Jor Bangla / Jor Mandir) | Correctly returned structured table with Creator (King Raghunath Singha), Date (1655 CE), Location with coordinates, and Description for item 119 | Pass | **[View screenshot](./screenshots/nlp/02-jor-mandir-metadata.png)** |
+| 3 | Which temple records have missing metadata? | Metadata quality audit across collection | Checked all 18 temple records (IDs 116, 118, 119, 121–134) against core template properties and correctly concluded 0 missing metadata fields | Pass | **[View screenshot](./screenshots/nlp/03-metadata-audit.png)** |
+| 4 | Show me the available digital assets for Patpur Temple | Digital asset inspection (Item 130) | Correctly identified 3D GLB model with vertex count (1.02M), polygon count (1.92M), capture date, and processing provenance; confirmed no video/extra assets | Pass | **[View screenshot](./screenshots/nlp/04-patpur-assets.png)** |
+| 5 | Find temples within 2 kilometres of Rasmancha. | Spatial proximity calculation (Geodesic distance from 23°04′06.29″ N, 87°19′19.33″ E) | Calculated distances to nearby monuments (Shyamrai ~0.4 km, Jor Bangla ~0.5 km, Lalji ~0.5 km, Nandalal ~0.8 km, etc.) within the 2 km radius | Pass | **[View screenshot](./screenshots/nlp/05-proximity-rasmancha.png)** |
+| 6 | Which temples are closest to Radha Govinda Temple? | Relative geospatial proximity (from 23°03′36.39″ N, 87°19′23.31″ E) | Identified the two Jor Mandir entries (ID 132) as very nearest (~0.13 km / ~130 m away); next closest identified as Nandalal (~0.84 km), Kalachand (~0.89 km), and Radha Madhab (~0.91 km), all within roughly 0.9 km | Pass | **[View screenshot](./screenshots/nlp/06-proximity-radhagovinda.png)** |
+| 7 | Compare the architectural features of Radha Binod Temple and Jor Mandir | Cross-record architectural comparison | Produced a side-by-side comparative table: Construction date (1659 CE vs 1726 CE), Style (*Atchala* vs *Ek-Ratna* group), Material (laterite with stucco), Roof type, and Dimensions | Pass | **[View screenshot](./screenshots/nlp/07-architecture-comparison.png)** |
+| 8 | Which temples have documented terracotta reliefs depicting scenes from the Ramayana? | Thematic iconography / narrative scene filter | Identified and summarised Ramayana narrative reliefs on Shyamrai (ID 118), Jor Bangla (ID 119), Kalachand (ID 129), Radha Madhab (ID 128), and Jor Mandir (ID 132) | Pass | **[View screenshot](./screenshots/nlp/08-ramayana-reliefs.png)** |
+| 9 | Summarise the historical significance of the catalogued temples | Multi-record historical synthesis | Synthesised historical significance across Malla dynasty heritage: Rasmancha (unique stepped-pyramid, Rash festival), Shyamrai (earliest Pancha-Ratna), Jor Bangla (hybrid do-chala/char-chala), Madan Mohan (continuous worship), etc. | Pass | **[View screenshot](./screenshots/nlp/09-historical-significance.png)** |
 
-All model session captures are archived under [`screenshots/nlp/`](file:///screenshots/nlp/).
+All model session captures are linked individually in the table above and are stored in [`screenshots/nlp/`](./screenshots/nlp/).
 
 ## 7. AI-assisted image preparation and 3D reconstruction workflow
 
