@@ -208,9 +208,9 @@ All full-size search interface captures are archived under [`screenshots/keyword
 
 All model session captures are archived under [`screenshots/nlp/`](file:///screenshots/nlp/).
 
-## 7. AI-assisted image preparation and 3D reconstruction prompts
+## 7. AI-assisted image preparation and 3D reconstruction workflow
 
-The following prompts document the image-preparation and image-to-3D workflow. Apply the image-preparation prompt to each source photograph before reconstruction. Keep the unmodified original photograph as the archival source; record the ChatGPT/model version and processing date alongside generated files when available. Prompt use does not by itself establish geometric accuracy or historical fidelity.
+The image-preparation prompt below documents the prompt used to prepare source photographs. For 3D reconstruction, the images were uploaded to Tripo and converted to 3D models with texture; no text prompt was supplied to Tripo. Keep the unmodified original photograph as the archival source and record the processing date and tool/version alongside generated files when available. This workflow does not establish geometric accuracy or historical fidelity.
 
 ### Image enhancement and background removal
 
@@ -233,31 +233,9 @@ Return the image at the original aspect ratio and highest available resolution a
 a transparent background. Do not add a new background, text, borders, or other objects.
 ```
 
-### Image-to-3D reconstruction
+### Image-to-3D conversion (Tripo)
 
-```text
-Create a highly detailed 3D reconstruction of the temple shown in the reference image. Preserve the exact architectural form, proportions, dimensions, symmetry, roof structure, walls, arches, pillars, entrances, cornices, decorative elements, and terracotta relief panels visible in the reference.
-
-Reconstruct the complete visible geometry as a physically plausible 3D object, including depth and thickness of architectural elements and the recessed and protruding terracotta ornamentation. Do not merely create a textured 2D surface.
-
-Use realistic aged burnt terracotta material, with natural variations in clay color, surface roughness, weathering, erosion, cracks, small imperfections, and subtle differences between individual terracotta bricks and relief sculptures.
-
-Accurately reconstruct the figurative terracotta panels, floral motifs, geometric patterns, mythological scenes, human figures, animals, and architectural ornamentation wherever they are visible. Preserve their original positions and relative scale.
-
-The model should be historically and architecturally faithful to the reference photograph, without adding modern architectural elements or decorations that are not visible in the reference.
-
-Generate a high-resolution, watertight, manifold 3D mesh suitable for further processing, digital heritage documentation, visualization, and conversion to GLB/GLTF.
-
-Use physically based materials with realistic PBR albedo, roughness, normal and displacement information. Maintain fine surface detail while keeping the geometry optimized enough for real-time WebGL viewing.
-
-Camera: orthographic or neutral perspective, front three-quarter view, showing the architectural depth clearly.
-
-Lighting: neutral studio lighting, soft shadows, no dramatic colored lighting.
-
-Background: plain neutral background.
-
-Important: Do not redesign, beautify, modernize, or reinterpret the temple. Reconstruct what is actually present in the reference image.
-```
+The prepared images were uploaded to Tripo and converted to textured 3D models using the service's image-to-3D workflow. No reconstruction prompt or additional text instructions were entered. The generated models are AI-assisted visualizations and should not be interpreted as metrically accurate or fully faithful reconstructions.
 
 ## Limitations
 
