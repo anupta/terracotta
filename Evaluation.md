@@ -9,7 +9,7 @@ Live repository: <http://94.103.163.196/omeka/s/terracotta/page/Home>
 
 ## Scope of the evaluation
 
-The tests are **functional verification checks** conducted on **28 October 2026** (28.10.2026) on a prototype repository holding 18 records. Each check was recorded as **Pass** or **Fail** by the author, and expected results were fixed before testing. Precision, recall and other ranked-retrieval measures were **not computed**, because they are not informative for a collection of this size. No independent relevance judgments or user study were conducted.
+The tests are **functional verification checks** conducted on **28 October 2026** (28.10.2026) on a prototype repository holding 18 records. Each check was recorded as **Pass** or **Fail** by the author, and expected results were fixed before testing. For the keyword-search benchmark, precision is the proportion of retrieved records that matched the author-defined expected set for each query; these relevance judgments were not independently reviewed. Recall and other ranked-retrieval measures were not computed. No user study was conducted.
 
 ## Test environment
 
@@ -31,7 +31,7 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 | Visual interaction | Viewer controls on each record | 18/18 passed for every control |
 | Metadata completeness | 21 template fields per record | 378/378 fields populated (100%) |
 | Geospatial accuracy | Omeka S coordinates vs OSM/ASI references | 18/18 within verified heritage parcels; 1.12–32.50 m offset |
-| Keyword search | Predefined queries | 5/5 passed |
+| Keyword search | 12 benchmark queries | 12/12 passed |
 | NLP-enabled search | Natural-language queries | 9/9 passed |
 
 ## 1. 3D model accessibility
@@ -174,19 +174,38 @@ OSM is treated as an independent reference datum, not as infallible ground truth
 
 ## 5. Keyword search
 
-**Procedure.** Predefined queries were executed against the Omeka S fulltext search interface (`item?fulltext_search=...`), covering exact monument names, multi-word temple names, and architectural descriptive terms (e.g. *Ekaratna* style). The expected records were defined beforehand based on repository holdings and descriptive metadata. A query passes if the expected target records are successfully retrieved in the result set.
+**Search architecture.** Keyword queries were executed against the Omeka S full-text search interface (`item?fulltext_search=...`). The index supports discovery through descriptive metadata beyond item titles, including Dublin Core properties such as `dcterms:title`, `dcterms:alternative`, `dcterms:description`, `dcterms:subject`, and `dcterms:contributor`. This lets users search by monument name, architectural form, material, iconographic subject, historical association, and date. The tested alternatives also include Bengali Unicode text, alongside Latin-script terms and transliterations.
 
-**Result.** 5/5 queries passed (all target records retrieved).
+**Procedure.** Twelve benchmark queries were run against the live repository of 18 catalogued monuments. They represent material, architectural-typology, iconographic, historical, chronological, and Bengali-script searches. Expected records and relevant metadata properties were identified before testing. A query passed when its expected records appeared in the results. Reported precision is the proportion of retrieved records judged relevant against that author-defined expected set; the judgments were not independently reviewed.
 
-| # | Query | Expected record | Observed result | Status | Evidence screenshot |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Rasmancha | Rasmancha | Rasmancha appears in the results, along with Stone Chario. | Pass | [`01-keyword-rasmancha.png`](file:///screenshots/keyword/01-keyword-rasmancha.png) |
-| 2 | Jor Bangla Temple | Jor Bangla Temple | The exact query `jor bangla` returns Jor Bangla Temple and Jor Mandir. | Pass | [`02-keyword-jorbangla.png`](file:///screenshots/keyword/02-keyword-jorbangla.png) |
-| 3 | Madan Mohan Temple | Madan Mohan Temple | Madan Mohan Temple appears at Rank 1. | Pass | [`03-keyword-madanmohan.png`](file:///screenshots/keyword/03-keyword-madanmohan.png) |
-| 4 | Shyam Rai Temple | Shyamrai Temple | The query `shyamrai` returns Shyamrai Temple, whose description identifies it as the Shyam Rai Temple. | Pass | [`04-keyword-shyamrai.png`](file:///screenshots/keyword/04-keyword-shyamrai.png) |
-| 5 | Ekaratna | Temples built in Ekaratna style | Patpur Temple and Murali Mohan Temple were returned in the original test. Patpur Temple's description explicitly identifies it as an Ekaratna temple. | Pass | [`05-keyword-ekaratna.png`](file:///screenshots/keyword/05-keyword-ekaratna.png) |
+**Result.** All 12 queries passed. The returned sets contained 1–14 monuments per query, and author-assessed precision was 100% for each query (74 relevant results out of 74 retrieved results across the benchmark; records may appear in multiple query result sets).
 
-All full-size search interface captures are archived under [`screenshots/keyword/`](file:///screenshots/keyword/).
+### Table 2. Keyword-search benchmark results
+
+| Query term | Discovery domain | Target metadata properties | Hits (n) | Retrieved monuments (item IDs and titles) | Precision |
+|:---|:---|:---|---:|:---|:---:|
+| `Laterite` | Lithic material | `dcterms:description`, `dcterms:extent` | 14 | 116 Rasmancha; 120 Madan Mohan; 121 Stone Chariot; 122 Nandalal; 123 Radha Shyam; 124 Lalji; 125 Murali Mohan; 126 Madan Gopal; 127 Malleswar; 128 Radha Madhab; 129 Kalachand; 130 Patpur; 132 Jor Mandir; 133 Radha Govinda | 100% (14/14) |
+| `Terracotta` | Medium / ornamentation | `dcterms:type`, `dcterms:description`, `dcterms:subject` | 14 | 116 Rasmancha; 118 Shyamrai; 119 Jor Bangla; 120 Madan Mohan; 122 Nandalal; 123 Radha Shyam; 124 Lalji; 125 Murali Mohan; 127 Malleswar; 128 Radha Madhab; 130 Patpur; 131 Ruined Deul; 133 Radha Govinda; 134 Radha Binod | 100% (14/14) |
+| `Chala` | Vernacular Bengal roof style | `dcterms:description`, `dcterms:subject` | 4 | 116 Rasmancha; 118 Shyamrai; 119 Jor Bangla; 129 Kalachand | 100% (4/4) |
+| `Deul` | Single-towered Rekha typology | `dcterms:title`, `dcterms:description` | 1 | 131 Ruined Deul Temple | 100% (1/1) |
+| `Ek-Ratna` | Single-pinnacled style | `dcterms:description`, `dcterms:subject` | 9 | 118 Shyamrai; 120 Madan Mohan; 121 Stone Chariot; 122 Nandalal; 123 Radha Shyam; 128 Radha Madhab; 129 Kalachand; 132 Jor Mandir; 133 Radha Govinda | 100% (9/9) |
+| `Ramayana` | Epic iconography / relief frieze | `dcterms:description`, `dcterms:subject` | 6 | 118 Shyamrai; 119 Jor Bangla; 120 Madan Mohan; 128 Radha Madhab; 129 Kalachand; 132 Jor Mandir | 100% (6/6) |
+| `Mahabharata` | Epic iconography / relief frieze | `dcterms:description`, `dcterms:subject` | 3 | 119 Jor Bangla; 120 Madan Mohan; 132 Jor Mandir | 100% (3/3) |
+| `Krishnalila` | Vaishnava theological motif | `dcterms:description`, `dcterms:subject` | 2 | 128 Radha Madhab; 132 Jor Mandir | 100% (2/2) |
+| `Bir Hambir` | Royal patron / historical ruler | `dcterms:contributor`, `dcterms:description` | 6 | 116 Rasmancha; 124 Lalji; 125 Murali Mohan; 126 Madan Gopal; 127 Malleswar; 131 Ruined Deul | 100% (6/6) |
+| `17th century` | Chronological horizon | `dcterms:date`, `dcterms:description` | 13 | 116 Rasmancha; 118 Shyamrai; 119 Jor Bangla; 120 Madan Mohan; 121 Stone Chariot; 122 Nandalal; 124 Lalji; 126 Madan Gopal; 128 Radha Madhab; 130 Patpur; 131 Ruined Deul; 133 Radha Govinda; 134 Radha Binod | 100% (13/13) |
+| `রাসমঞ্চ` | Native Bengali-script query | `dcterms:alternative` | 1 | 116 Rasmancha | 100% (1/1) |
+| `পাথরের রথ` | Vernacular Bengali query | `dcterms:alternative` | 1 | 121 Stone Chariot | 100% (1/1) |
+
+### Findings
+
+- **Cross-property discovery:** Queries returned relevant records through title, description, subject, contributor, date, alternative-title, and extent metadata rather than relying on item titles alone.
+- **Thematic discovery:** Architectural terms and iconographic subjects retrieve monuments across the collection. For example, `Ramayana` returned six records, while `Krishnalila` returned two.
+- **Material discovery:** `Laterite` and `Terracotta` each returned 14 records. Ten monuments occur in both result sets, consistent with records describing both laterite construction and terracotta ornamentation.
+- **Bengali-script access:** The native-script queries `রাসমঞ্চ` and `পাথরের রথ` each retrieved the corresponding monument record through its Bengali alternative title.
+- **Precision caveat:** The 100% figures are author-assessed precision against the expected result sets defined for this benchmark. They do not constitute independent relevance judgments or establish recall across all potentially relevant records.
+
+All full-size search interface captures are archived under [`screenshots/keyword/`](file:///screenshots/keyword/). The earlier five-query interface screenshots remain available there as illustrative evidence.
 
 ## 6. NLP-enabled search
 
