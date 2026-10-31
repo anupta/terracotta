@@ -229,9 +229,9 @@ All model session captures are archived under [`screenshots/nlp/`](file:///scree
 
 ## 7. AI-assisted image preparation and 3D reconstruction workflow
 
-The image-preparation prompt below documents the prompt used to prepare source photographs. For 3D reconstruction, the images were uploaded to Tripo and converted to 3D models with texture; no text prompt was supplied to Tripo. Keep the unmodified original photograph as the archival source and record the processing date and tool/version alongside generated files when available. This workflow does not establish geometric accuracy or historical fidelity.
+The following reconstruction prompt is documented as an example and was not supplied to Tripo. In the workflow evaluated here, source photographs were uploaded to Tripo and converted to 3D models with texture without a text prompt. Keep the unmodified original photograph as the archival source and record the processing date and tool/version alongside generated files when available. This workflow does not establish geometric accuracy or historical fidelity.
 
-### Image enhancement and background removal
+### Example 3D reconstruction prompt
 
 ```text
 Create a highly detailed 3D reconstruction of the temple shown in the reference image. Preserve the exact architectural form, proportions, dimensions, symmetry, roof structure, walls, arches, pillars, entrances, cornices, decorative elements, and terracotta relief panels visible in the reference.
