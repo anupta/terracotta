@@ -234,22 +234,27 @@ The image-preparation prompt below documents the prompt used to prepare source p
 ### Image enhancement and background removal
 
 ```text
-Prepare this photograph of a historic terracotta temple for image-to-3D reconstruction.
-Carefully isolate the complete temple from its surroundings and remove only the background,
-leaving it transparent. Preserve the entire temple silhouette, including its base, roof,
-cornices, projections, recesses, pillars, openings, and visible relief panels; do not crop
-or simplify any part of the structure.
+**Create a highly detailed 3D reconstruction of the temple shown in the reference image. Preserve the exact architectural form, proportions, dimensions, symmetry, roof structure, walls, arches, pillars, entrances, cornices, decorative elements, and terracotta relief panels visible in the reference.**
 
-Make only conservative photographic corrections that improve visibility: balance exposure
-and white balance, reduce distracting image noise, and apply subtle sharpening if needed.
-Preserve the original viewpoint, proportions, colors, weathering, cracks, shadows on the
-temple, and all visible architectural and surface details. Do not redraw, replace, invent,
-beautify, recolor, or remove any part of the temple. Do not fill occlusions or infer details
-that are not visible. If separating a background region risks damaging the temple outline
-or detail, preserve that region rather than erase it.
+**Reconstruct the complete visible geometry as a physically plausible 3D object, including depth and thickness of architectural elements and the recessed and protruding terracotta ornamentation. Do not merely create a textured 2D surface.**
 
-Return the image at the original aspect ratio and highest available resolution as a PNG with
-a transparent background. Do not add a new background, text, borders, or other objects.
+Use realistic aged **burnt terracotta material**, with natural variations in clay color, surface roughness, weathering, erosion, cracks, small imperfections, and subtle differences between individual terracotta bricks and relief sculptures.
+
+Accurately reconstruct the figurative terracotta panels, floral motifs, geometric patterns, mythological scenes, human figures, animals, and architectural ornamentation wherever they are visible. Preserve their original positions and relative scale.
+
+The model should be **historically and architecturally faithful to the reference photograph**, without adding modern architectural elements or decorations that are not visible in the reference.
+
+Generate a **high-resolution, watertight, manifold 3D mesh** suitable for further processing, digital heritage documentation, visualization, and conversion to **GLB/GLTF**.
+
+Use physically based materials with realistic **PBR albedo, roughness, normal and displacement information**. Maintain fine surface detail while keeping the geometry optimized enough for real-time WebGL viewing.
+
+**Camera:** orthographic or neutral perspective, front three-quarter view, showing the architectural depth clearly.
+
+**Lighting:** neutral studio lighting, soft shadows, no dramatic colored lighting.
+
+**Background:** plain neutral background.
+
+**Important:** Do not redesign, beautify, modernize, or reinterpret the temple. Reconstruct what is actually present in the reference image.
 ```
 
 ### Image-to-3D conversion (Tripo)
