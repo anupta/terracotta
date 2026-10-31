@@ -244,9 +244,9 @@ Accurately reconstruct the figurative terracotta panels, floral motifs, geometri
 
 The model should be historically and architecturally faithful to the reference photograph, without adding modern architectural elements or decorations that are not visible in the reference.
 
-Generate a high-resolution, watertight, manifold 3D mesh** suitable for further processing, digital heritage documentation, visualization, and conversion to GLB/GLTF.
+Generate a high-resolution, watertight, manifold 3D mesh suitable for further processing, digital heritage documentation, visualization, and conversion to GLB/GLTF.
 
-Use physically based materials with realistic **PBR albedo, roughness, normal and displacement information**. Maintain fine surface detail while keeping the geometry optimized enough for real-time WebGL viewing.
+Use physically based materials with realistic PBR albedo, roughness, normal and displacement information. Maintain fine surface detail while keeping the geometry optimized enough for real-time WebGL viewing.
 
 Camera: orthographic or neutral perspective, front three-quarter view, showing the architectural depth clearly.
 
