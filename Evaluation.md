@@ -20,7 +20,7 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 | Network | Speed test at the testing location: 32.46 Mbps download, 7.67 Mbps upload, 35 ms ping (latency under load 231 ms download, 839 ms upload); connection type: Jio 5G mobile hotspot |
 | Test date | 28 October 2026 (28.10.2026) |
 | Server | Ubuntu cloud VPS, 2-core CPU, 4 GB RAM |
-| Platform | Omeka S with the Heritage Object resource template (21 fields) |
+| Platform | Omeka S with Resource Template 13, Heritage Object (21 template fields; 20 evaluated, excluding `dcterms:rights`) |
 | NLP search model | GPT-OSS 20B through MCP |
 
 ## Summary
@@ -29,10 +29,10 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 | --- | --- | --- |
 | 3D model accessibility | GLB model loaded in viewer | 18/18 passed |
 | Visual interaction | Viewer controls on each record | 18/18 passed for every control |
-| Metadata completeness | 21 template fields per record | 378/378 fields populated (100%) |
+| Metadata completeness | 20 evaluated fields per item; `dcterms:rights` excluded | 351/360 field instances populated (97.5%) |
 | Geospatial accuracy | Omeka S coordinates vs OSM/ASI references | 18/18 within verified heritage parcels; 1.12–32.50 m offset |
 | Keyword search | 12 benchmark queries | 12/12 passed |
-| NLP-enabled search | Natural-language queries | 9/9 passed |
+| NLP-enabled search | Natural-language queries | 8/9 passed |
 
 ## 1. 3D model accessibility
 
@@ -90,31 +90,58 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 
 ## 3. Metadata completeness
 
-**Procedure.** Each record was checked against the 21-field Heritage Object template. A field counts as complete if it is present and populated.
+**Procedure.** The metadata audit covered all 18 catalogued monuments against 20 evaluated fields in Resource Template 13 (Heritage Object); `dcterms:rights` was excluded from the completeness calculation. Rights information is recorded in `dcterms:license` (Creative Commons CC BY-NC-SA 4.0). A field counts as complete when it is present and populated. This check assesses field presence only, not the accuracy of values or conformance to controlled vocabularies.
 
-**Result.** 378 of 378 expected field instances were populated (18 records x 21 fields = 100%). This confirms field presence only; it does not verify the accuracy of values or conformance to controlled vocabularies.
+**Result.** The repository contains 351 populated instances out of 360 expected instances (18 items x 20 fields), for an overall completeness of **97.5%**. Nine items have all 20 evaluated fields populated (50.0%); the remaining nine have 19/20 fields populated (95.0%). All 18 items meet or exceed 90% completeness.
 
-| # | Temple | Fields populated | Fields expected | Result |
-| --- | --- | --- | --- | --- |
-| 1 | Rasmancha | 21 | 21 | Pass |
-| 2 | Shyamrai Temple | 21 | 21 | Pass |
-| 3 | Jor Bangla Temple | 21 | 21 | Pass |
-| 4 | Madan Mohan Temple | 21 | 21 | Pass |
-| 5 | Stone Chario | 21 | 21 | Pass |
-| 6 | Nandalal Temple | 21 | 21 | Pass |
-| 7 | Radha Shyam Temple | 21 | 21 | Pass |
-| 8 | Lalji Temple | 21 | 21 | Pass |
-| 9 | Murali Mohan Temple | 21 | 21 | Pass |
-| 10 | Madan Gopal Temple | 21 | 21 | Pass |
-| 11 | Malleswar Temple | 21 | 21 | Pass |
-| 12 | Radha Madhab Temple | 21 | 21 | Pass |
-| 13 | Kalachand Temple | 21 | 21 | Pass |
-| 14 | Patpur Temple | 21 | 21 | Pass |
-| 15 | Ruined Deul Temple | 21 | 21 | Pass |
-| 16 | Jor Mandir | 21 | 21 | Pass |
-| 17 | Radha Govinda Temple | 21 | 21 | Pass |
-| 18 | Radha Binod Temple | 21 | 21 | Pass |
-| | **Total** | **378** | **378** | **100%** |
+| Item ID | Monument title | Populated fields | Evaluated fields | Completeness | Unpopulated evaluated field(s) |
+| ---: | --- | ---: | ---: | ---: | --- |
+| 116 | Rasmancha | 20 | 20 | 100% | None |
+| 118 | Shyamrai Temple | 20 | 20 | 100% | None |
+| 119 | Jor Bangla Temple | 20 | 20 | 100% | None |
+| 120 | Madan Mohan Temple | 20 | 20 | 100% | None |
+| 121 | Stone Chariot | 19 | 20 | 95% | `dcterms:contributor` |
+| 122 | Nandalal Temple | 19 | 20 | 95% | `dcterms:contributor` |
+| 123 | Radha Shyam Temple | 20 | 20 | 100% | None |
+| 124 | Lalji Temple | 19 | 20 | 95% | `dcterms:extent` |
+| 125 | Murali Mohan Temple | 19 | 20 | 95% | `dcterms:extent` |
+| 126 | Madan Gopal Temple | 19 | 20 | 95% | `dcterms:extent` |
+| 127 | Malleswar Temple | 19 | 20 | 95% | `dcterms:extent` |
+| 128 | Radha Madhab Temple | 19 | 20 | 95% | `dcterms:extent` |
+| 129 | Kalachand Temple | 19 | 20 | 95% | `dcterms:extent` |
+| 130 | Patpur Temple | 19 | 20 | 95% | `dcterms:extent` |
+| 131 | Ruined Deul Temple | 20 | 20 | 100% | None |
+| 132 | Jor Mandir Group | 20 | 20 | 100% | None |
+| 133 | Radha Govinda Temple | 20 | 20 | 100% | None |
+| 134 | Radha Binod Temple | 20 | 20 | 100% | None |
+|  | **Total** | **351** | **360** | **97.5%** |  |
+
+### Field-by-field population (Resource Template 13)
+
+| # | Property | Vocabulary | Field label | Populated items | Coverage | Status |
+| ---: | --- | --- | --- | ---: | ---: | --- |
+| 1 | `dcterms:title` | Dublin Core | Title | 18/18 | 100% | Full |
+| 2 | `dcterms:alternative` | Dublin Core | Alternative title (Bengali script) | 18/18 | 100% | Full |
+| 3 | `dcterms:contributor` | Dublin Core | Contributor (Malla Dynasty patron) | 16/18 | 88.9% | Partial (missing for items 121 and 122) |
+| 4 | `dcterms:identifier` | Dublin Core | Identifier (UNESCO, ASI, Wikidata, DOI) | 18/18 | 100% | Full |
+| 5 | `dcterms:type` | Dublin Core | Type | 18/18 | 100% | Full |
+| 6 | `dcterms:description` | Dublin Core | Description | 18/18 | 100% | Full |
+| 7 | `dcterms:date` | Dublin Core | Date | 18/18 | 100% | Full |
+| 8 | `dcterms:subject` | Dublin Core | Subject (thematic keywords) | 18/18 | 100% | Full |
+| 9 | `dcterms:spatial` | Dublin Core | Spatial coverage (DMS and map link) | 18/18 | 100% | Full |
+| 10 | `dcterms:extent` | Dublin Core | Extent (base dimensions and height) | 11/18 | 61.1% | Partial (seven items lack survey dimensions) |
+| 11 | `dcterms:license` | Dublin Core | License (CC BY-NC-SA 4.0) | 18/18 | 100% | Full |
+| 12 | `edm:type` | Europeana 3D | EDM type (`3D`) | 18/18 | 100% | Full |
+| 13 | `edm:intendedUsage` | Europeana 3D | Intended usage (`3D visualization`) | 18/18 | 100% | Full |
+| 14 | `edm:vertexCount` | Europeana 3D | Vertex count (mesh geometry) | 18/18 | 100% | Full |
+| 15 | `edm:polygonCount` | Europeana 3D | Polygon count (mesh geometry) | 18/18 | 100% | Full |
+| 16 | `dcterms:format` | Dublin Core | Format (`GLB (.glb)`) | 18/18 | 100% | Full |
+| 17 | `schema:digitalSourceType` | Schema.org | Digital source type | 18/18 | 100% | Full |
+| 18 | `tc3d:captureDate` | Terracotta-3D | Capture date | 18/18 | 100% | Full |
+| 19 | `tc3d:processingSoftware` | Terracotta-3D | Processing software | 18/18 | 100% | Full |
+| 20 | `tc3d:processingDate` | Terracotta-3D | Processing date | 18/18 | 100% | Full |
+
+The nine technical and digital-object properties (`edm:type`, `edm:intendedUsage`, `edm:vertexCount`, `edm:polygonCount`, `dcterms:format`, `schema:digitalSourceType`, `tc3d:captureDate`, `tc3d:processingSoftware`, and `tc3d:processingDate`) are populated for all 18 items. Titles, Bengali alternative titles, identifiers, type, description, date, subject, spatial coverage, and license are also populated for all items. The remaining gaps are `dcterms:contributor` for items 121 and 122, and `dcterms:extent` for items 124–130.
 
 ## 4. Geospatial discovery
 
@@ -211,13 +238,13 @@ OSM is treated as an independent reference datum, not as infallible ground truth
 
 **Procedure.** 9 natural-language queries covering structured field retrieval, metadata completeness audits, digital asset inspection, spatial proximity calculations, architectural comparisons, thematic iconography filtering, and cross-collection historical synthesis were submitted to GPT-OSS 20B through the Model Context Protocol (MCP) integration with the Omeka S server. Expected answers and records were defined beforehand by the author. Each query was evaluated on whether the LLM correctly queried the Omeka MCP tools and synthesised the expected records.
 
-**Result.** 9/9 queries returned the expected records, metadata values, or analytical answers (100% pass rate).
+**Result.** 8/9 queries returned the expected records, metadata values, or analytical answers (88.9% pass rate). The completeness-audit query incorrectly reported no missing metadata; the subsequent 20-field audit documented above found nine missing field instances across nine items.
 
 | # | Natural-language query | Query type / Expected result | Model response summary (MCP + GPT-OSS 20B) | Result | Evidence screenshot |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Find records related to Rasmancha in Bishnupur | Record retrieval (Rasmancha, ID 116) | Returned Rasmancha (ID 116) with item URL and metadata summary | Pass | **[View screenshot](./screenshots/nlp/01-rasmancha-retrieval.png)** |
 | 2 | Show me the creator, date, location, description, and identifier of Jor Mandir | Specific metadata field extraction (Jor Bangla / Jor Mandir) | Correctly returned structured table with Creator (King Raghunath Singha), Date (1655 CE), Location with coordinates, and Description for item 119 | Pass | **[View screenshot](./screenshots/nlp/02-jor-mandir-metadata.png)** |
-| 3 | Which temple records have missing metadata? | Metadata quality audit across collection | Checked all 18 temple records (IDs 116, 118, 119, 121–134) against core template properties and correctly concluded 0 missing metadata fields | Pass | **[View screenshot](./screenshots/nlp/03-metadata-audit.png)** |
+| 3 | Which temple records have missing metadata? | Metadata quality audit across collection | Reported zero missing fields, but the subsequent audit found missing `dcterms:contributor` values for items 121 and 122 and missing `dcterms:extent` values for items 124–130 | Fail | **[View screenshot](./screenshots/nlp/03-metadata-audit.png)** |
 | 4 | Show me the available digital assets for Patpur Temple | Digital asset inspection (Item 130) | Correctly identified 3D GLB model with vertex count (1.02M), polygon count (1.92M), capture date, and processing provenance; confirmed no video/extra assets | Pass | **[View screenshot](./screenshots/nlp/04-patpur-assets.png)** |
 | 5 | Find temples within 2 kilometres of Rasmancha. | Spatial proximity calculation (Geodesic distance from 23°04′06.29″ N, 87°19′19.33″ E) | Calculated distances to nearby monuments (Shyamrai ~0.4 km, Jor Bangla ~0.5 km, Lalji ~0.5 km, Nandalal ~0.8 km, etc.) within the 2 km radius | Pass | **[View screenshot](./screenshots/nlp/05-proximity-rasmancha.png)** |
 | 6 | Which temples are closest to Radha Govinda Temple? | Relative geospatial proximity (from 23°03′36.39″ N, 87°19′23.31″ E) | Identified the two Jor Mandir entries (ID 132) as very nearest (~0.13 km / ~130 m away); next closest identified as Nandalal (~0.84 km), Kalachand (~0.89 km), and Radha Madhab (~0.91 km), all within roughly 0.9 km | Pass | **[View screenshot](./screenshots/nlp/06-proximity-radhagovinda.png)** |
