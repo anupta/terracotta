@@ -43,6 +43,10 @@ git commit -m "Update %TIMESTAMP%"
 if errorlevel 1 goto :failed
 
 :push
+echo Integrating latest changes from origin/%BRANCH%...
+git pull --rebase origin "%BRANCH%"
+if errorlevel 1 goto :failed
+
 echo Pushing to origin/%BRANCH%...
 git push origin "%BRANCH%"
 if errorlevel 1 goto :failed
