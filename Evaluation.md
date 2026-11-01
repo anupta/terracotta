@@ -9,7 +9,7 @@ Live repository: <http://94.103.163.196/omeka/s/terracotta/page/Home>
 
 ## Scope of the evaluation
 
-The tests are **functional verification checks** conducted on **28 October 2026** (28.10.2026) on a prototype repository holding 18 records. Each check was recorded as **Pass** or **Fail** by the author, and expected results were fixed before testing. For the keyword-search benchmark, precision is the proportion of retrieved records that matched the author-defined expected set for each query; these relevance judgments were not independently reviewed. Recall and other ranked-retrieval measures were not computed. No user study was conducted.
+The tests are **functional verification checks** conducted on a prototype repository holding 18 records. The main system checks and first nine NLP queries were conducted on **28 October 2026** (28.10.2026); the six additional Bengali- and Hindi-language NLP queries were captured on **1 November 2026**, as dated in their screenshots. Each check was recorded as **Pass** or **Fail** by the author, and expected results were fixed before testing. For the keyword-search benchmark, precision is the proportion of retrieved records that matched the author-defined expected set for each query; these relevance judgments were not independently reviewed. Recall and other ranked-retrieval measures were not computed. No user study was conducted.
 
 ## Test environment
 
@@ -32,7 +32,7 @@ The tests are **functional verification checks** conducted on **28 October 2026*
 | Metadata completeness | 20 evaluated fields per item; `dcterms:rights` excluded | 351/360 field instances populated (97.5%) |
 | Geospatial accuracy | Omeka S coordinates vs OSM/ASI references | 18/18 within verified heritage parcels; 1.12–32.50 m offset |
 | Keyword search | 12 benchmark queries | 12/12 passed |
-| NLP-enabled search | Natural-language queries | 8/9 passed |
+| NLP-enabled search | Natural-language queries | 14/15 passed |
 
 ## 1. 3D model accessibility
 
@@ -236,9 +236,9 @@ OSM is treated as an independent reference datum, not as infallible ground truth
 
 ## 6. NLP-enabled search
 
-**Procedure.** 9 natural-language queries covering structured field retrieval, metadata completeness audits, digital asset inspection, spatial proximity calculations, architectural comparisons, thematic iconography filtering, and cross-collection historical synthesis were submitted to GPT-OSS 20B through the Model Context Protocol (MCP) integration with the Omeka S server. Expected answers and records were defined beforehand by the author. Each query was evaluated on whether the LLM correctly queried the Omeka MCP tools and synthesised the expected records.
+**Procedure.** 15 natural-language queries covering structured field retrieval, metadata completeness audits, digital asset inspection, spatial proximity calculations, architectural comparisons, thematic iconography filtering, cross-collection historical synthesis, and Bengali- and Hindi-language queries were submitted to GPT-OSS 20B through the Model Context Protocol (MCP) integration with the Omeka S server. Expected answers and records were defined beforehand by the author. Each query was evaluated on whether the LLM correctly queried the Omeka MCP tools and synthesised the expected records.
 
-**Result.** 8/9 queries returned the expected records, metadata values, or analytical answers (88.9% pass rate). The completeness-audit query incorrectly reported no missing metadata; the subsequent 20-field audit documented above found nine missing field instances across nine items.
+**Result.** 14/15 queries returned the expected records, metadata values, or analytical answers (93.3% pass rate). The Bengali and Hindi queries returned the requested temple details, construction date, architectural styles, model availability, and coordinates. The completeness-audit query incorrectly reported no missing metadata; the subsequent 20-field audit documented above found nine missing field instances across nine items.
 
 | # | Natural-language query | Query type / Expected result | Model response summary (MCP + GPT-OSS 20B) | Result | Evidence screenshot |
 | --- | --- | --- | --- | --- | --- |
@@ -251,6 +251,12 @@ OSM is treated as an independent reference datum, not as infallible ground truth
 | 7 | Compare the architectural features of Radha Binod Temple and Jor Mandir | Cross-record architectural comparison | Produced a side-by-side comparative table: Construction date (1659 CE vs 1726 CE), Style (*Atchala* vs *Ek-Ratna* group), Material (laterite with stucco), Roof type, and Dimensions | Pass | **[View screenshot](./screenshots/nlp/07-architecture-comparison.png)** |
 | 8 | Which temples have documented terracotta reliefs depicting scenes from the Ramayana? | Thematic iconography / narrative scene filter | Identified and summarised Ramayana narrative reliefs on Shyamrai (ID 118), Jor Bangla (ID 119), Kalachand (ID 129), Radha Madhab (ID 128), and Jor Mandir (ID 132) | Pass | **[View screenshot](./screenshots/nlp/08-ramayana-reliefs.png)** |
 | 9 | Summarise the historical significance of the catalogued temples | Multi-record historical synthesis | Synthesised historical significance across Malla dynasty heritage: Rasmancha (unique stepped-pyramid, Rash festival), Shyamrai (earliest Pancha-Ratna), Jor Bangla (hybrid do-chala/char-chala), Madan Mohan (continuous worship), etc. | Pass | **[View screenshot](./screenshots/nlp/09-historical-significance.png)** |
+| 10 | **Bengali:** রাসমঞ্চ মন্দির সম্পর্কে বিস্তারিত তথ্য দাও (*Give detailed information about Rasmancha Temple*) | Multilingual record retrieval and detail synthesis (Rasmancha, ID 116) | Returned a structured overview including the temple name, location, construction history, patron, purpose, and architectural features | Pass | **[View screenshot](./screenshots/nlp/10-bengali-rasmancha-details.png)** |
+| 11 | **Bengali:** মদনমোহন মন্দিরের নির্মাণকাল কত? (*When was Madan Mohan Temple built?*) | Specific historical fact retrieval (Madan Mohan, ID 120) | Returned 1694 CE as the construction date | Pass | **[View screenshot](./screenshots/nlp/11-bengali-madan-mohan-date.png)** |
+| 12 | **Bengali:** বিষ্ণুপুরের কোন কোন মন্দিরে একরত্ন স্থাপত্যরীতি দেখা যায়? (*Which temples in Bishnupur have Ek-Ratna architecture?*) | Architectural-typology retrieval across records | Listed Ek-Ratna temples with item IDs and architectural details, including Madan Mohan (120), Radha Shyam (123), Radha Madhab (128), Kalachand (129), and Patpur (130) | Pass | **[View screenshot](./screenshots/nlp/12-bengali-ekaratna-temples.png)** |
+| 13 | **Bengali:** চালা স্থাপত্যশৈলীর মন্দিরগুলোর নাম কী? (*Which temples have Chala-style architecture?*) | Architectural-style retrieval across records | Named Shyamrai, Jor Bangla, Kalachand, and Radha Binod temples and described their roof forms | Pass | **[View screenshot](./screenshots/nlp/13-bengali-chala-temples.png)** |
+| 14 | **Hindi:** किन मंदिरों के 3D मॉडल उपलब्ध हैं? (*Which temples have 3D models available?*) | Digital asset availability across records | Returned a table of temples and item IDs with GLB model availability marked; all displayed entries were marked available | Pass | **[View screenshot](./screenshots/nlp/14-hindi-3d-models.png)** |
+| 15 | **Hindi:** पाटपुर मंदिर के अक्षांश और देशांतर बताइए (*Give the latitude and longitude of Patpur Temple*) | Coordinate retrieval (Patpur, ID 130) | Returned 23°04′31.26″ N, 87°20′13.90″ E, matching the catalogued coordinates | Pass | **[View screenshot](./screenshots/nlp/15-hindi-patpur-coordinates.png)** |
 
 All model session captures are linked individually in the table above and are stored in [`screenshots/nlp/`](./screenshots/nlp/).
 
@@ -316,6 +322,12 @@ screenshots/                              audit verification screenshots
 │   ├── 06-proximity-radhagovinda.png
 │   ├── 07-architecture-comparison.png
 │   ├── 08-ramayana-reliefs.png
-│   └── 09-historical-significance.png
+│   ├── 09-historical-significance.png
+│   ├── 10-bengali-rasmancha-details.png
+│   ├── 11-bengali-madan-mohan-date.png
+│   ├── 12-bengali-ekaratna-temples.png
+│   ├── 13-bengali-chala-temples.png
+│   ├── 14-hindi-3d-models.png
+│   └── 15-hindi-patpur-coordinates.png
 └── viewer/                               WebGL 3D model viewer verification captures
 ```
