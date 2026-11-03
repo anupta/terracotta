@@ -1,8 +1,6 @@
 # Terracotta3D: Evaluation Records
 
-Test protocol and results for the Terracotta3D repository, a FAIR-oriented 3D digital heritage repository of 18 terracotta temples of Bishnupur, West Bengal, India. The repository is built on Omeka S and combines an interactive 3D viewer, standards-based metadata, a map interface, keyword search and a natural-language search supported by GPT-OSS 20B through the Model Context Protocol (MCP).
 
-This page supports Section 5 (System Testing and Evaluation) of the manuscript **Designing a FAIR-Oriented 3D Digital Heritage Repository: A Case Study of the Terracotta Temples of Bishnupur, West Bengal**. The manuscript summarises the outcomes; this page holds the full tables, query lists and screenshots.
 
 Live repository: <http://94.103.163.196/omeka/s/terracotta/page/Home>
 
