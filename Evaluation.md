@@ -5,9 +5,7 @@
 Live repository: <http://94.103.163.196/omeka/s/terracotta/page/Home>
 
 
-## Scope of the evaluation
 
-The tests are **functional verification checks** conducted on a prototype repository holding 18 records. The main system checks and first nine NLP queries were conducted on **28 October 2026** (28.10.2026); the six additional Bengali- and Hindi-language NLP queries were captured on **1 November 2026**, as dated in their screenshots. Each check was recorded as **Pass** or **Fail** by the author, and expected results were fixed before testing. For the keyword-search benchmark, precision is the proportion of retrieved records that matched the author-defined expected set for each query; these relevance judgments were not independently reviewed. Recall and other ranked-retrieval measures were not computed. No user study was conducted.
 
 ## Test environment
 
