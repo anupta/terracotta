@@ -19,16 +19,6 @@ Live repository: <http://94.103.163.196/omeka/s/terracotta/page/Home>
 | Platform | Omeka S with Resource Template 13, Heritage Object (21 template fields; 20 evaluated, excluding `dcterms:rights`) |
 | NLP search model | GPT-OSS 20B through MCP |
 
-## Summary
-
-| Component | Test | Outcome |
-| --- | --- | --- |
-| 3D model accessibility | GLB model loaded in viewer | 18/18 passed |
-| Visual interaction | Viewer controls on each record | 18/18 passed for every control |
-| Metadata completeness | 20 evaluated fields per item; `dcterms:rights` excluded | 351/360 field instances populated (97.5%) |
-| Geospatial accuracy | Omeka S coordinates vs OSM/ASI references | 18/18 within verified heritage parcels; 1.12–32.50 m offset |
-| Keyword search | 12 benchmark queries | 12/12 passed |
-| NLP-enabled search | Natural-language queries | 14/15 passed |
 
 ## 1. 3D model accessibility
 
