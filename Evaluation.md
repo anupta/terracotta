@@ -317,3 +317,5 @@ screenshots/                              audit verification screenshots
 │   └── 15-hindi-patpur-coordinates.png
 └── viewer/                               WebGL 3D model viewer verification captures
 ```
+
+Copyright © 2026 Anupta Jana. All rights reserved.
