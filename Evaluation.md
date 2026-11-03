@@ -174,24 +174,11 @@ where $\phi$ is latitude, $\lambda$ is longitude, and $R = 6{,}371{,}000\ \text{
 | 133 | Radha Govinda Temple | 23.060108, 87.323142 | 23.060138, 87.323102 | 5.23 m | OSM `node/7369043190` / Wikidata `Q7280206` | Within temple plinth |
 | 134 | Radha Binod Temple | 23.080797, 87.327711 | 23.080804, 87.327720 | 1.18 m | OSM `node/7369024098` / Wikidata `Q104870429` | Pinpoint match (< 5 m) |
 
-### Interpretation
 
-The larger offsets (15–33 m) are attributable to architectural scale and differing feature definitions rather than recording inaccuracies. OSM survey contributors may place nodes at perimeter gates, compound boundaries, or courtyard access steps, whereas Omeka S coordinates consistently target the central sanctum tower (*shikhara*). This distinction is especially evident in large-scale complexes:
-
-- **Jor Mandir Group (Item 132):** The repository describes Jor Mandir as a three-shrine complex built in 1726 CE, comprising two large flanking laterite shrines (11.8 × 11.8 m) and a smaller central shrine (7.0 × 7.0 m) arranged across a unified compound. A single point for the group can therefore be approximately 15 m from the centroid of an individual shrine.
-- **Rasmancha (Item 116):** This monument has a 30 × 30 m laterite-stone plinth and an overall height of 12.5 m. A reference point at the outer circumambulatory steps and a repository point at the central pyramidal peak can naturally diverge by 20–25 m while both remain within the monument.
-
-OSM is treated as an independent reference datum, not as infallible ground truth, given the voluntary and variable nature of crowd-sourced mapping. Because Omeka S coordinates follow a consistent sanctum-centroid convention, the 15–33 m offsets can be a structural characteristic of the collection. Agreement within 33 m is sufficient for public discovery, geospatial filtering, and spatial search to place each monument accurately on regional maps and distinguish adjacent temples in Bishnupur.
-
-> **Repository indexing note:** Item ID 117 was an uncatalogued test record removed during early database staging. The active collection therefore contains 18 monuments indexed as ID 116 and IDs 118–134.
 
 ## 5. Keyword search
 
-**Search architecture.** Keyword queries were executed against the Omeka S full-text search interface (`item?fulltext_search=...`). The index supports discovery through descriptive metadata beyond item titles, including Dublin Core properties such as `dcterms:title`, `dcterms:alternative`, `dcterms:description`, `dcterms:subject`, and `dcterms:contributor`. This lets users search by monument name, architectural form, material, iconographic subject, historical association, and date. The tested alternatives also include Bengali Unicode text, alongside Latin-script terms and transliterations.
 
-**Procedure.** Twelve benchmark queries were run against the live repository of 18 catalogued monuments. They represent material, architectural-typology, iconographic, historical, chronological, and Bengali-script searches. Expected records and relevant metadata properties were identified before testing. A query passed when its expected records appeared in the results. Reported precision is the proportion of retrieved records judged relevant against that author-defined expected set; the judgments were not independently reviewed.
-
-**Result.** All 12 queries passed. The returned sets contained 1–14 monuments per query, and author-assessed precision was 100% for each query (74 relevant results out of 74 retrieved results across the benchmark; records may appear in multiple query result sets).
 
 ### Table 2. Keyword-search benchmark results
 
@@ -222,9 +209,7 @@ OSM is treated as an independent reference datum, not as infallible ground truth
 
 ## 6. NLP-enabled search
 
-**Procedure.** 15 natural-language queries covering structured field retrieval, metadata completeness audits, digital asset inspection, spatial proximity calculations, architectural comparisons, thematic iconography filtering, cross-collection historical synthesis, and Bengali- and Hindi-language queries were submitted to GPT-OSS 20B through the Model Context Protocol (MCP) integration with the Omeka S server. Expected answers and records were defined beforehand by the author. Each query was evaluated on whether the LLM correctly queried the Omeka MCP tools and synthesised the expected records.
 
-**Result.** 14/15 queries returned the expected records, metadata values, or analytical answers (93.3% pass rate). The Bengali and Hindi queries returned the requested temple details, construction date, architectural styles, model availability, and coordinates. The completeness-audit query incorrectly reported no missing metadata; the subsequent 20-field audit documented above found nine missing field instances across nine items.
 
 | # | Natural-language query | Query type / Expected result | Model response summary (MCP + GPT-OSS 20B) | Result | Evidence screenshot |
 | --- | --- | --- | --- | --- | --- |
@@ -280,13 +265,7 @@ Important: Do not redesign, beautify, modernize, or reinterpret the temple. Reco
 
 The prepared images were uploaded to Tripo and converted to textured 3D models using the service's image-to-3D workflow. No reconstruction prompt or additional text instructions were entered. The generated models are AI-assisted visualizations and should not be interpreted as metrically accurate or fully faithful reconstructions.
 
-## Limitations
 
-- Single evaluator, who also built the system; expected results were not verified independently.
-- Small collection (18 records) and small query sets.
-- Not evaluated: geometric fidelity of the AI-generated 3D models, accuracy of metadata values, user experience, performance under concurrent access.
-- The photographs were not captured with a standard photogrammetric protocol (consistent focal length, resolution, camera positions or lighting). The models were generated by AI-assisted image-to-3D software and are not metrically validated digital twins.
-- The repository runs on a resource-constrained VPS; behaviour under heavy traffic, large model files or concurrent requests has not been tested.
 
 ## Repository contents
 
